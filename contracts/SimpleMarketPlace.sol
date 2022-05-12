@@ -25,15 +25,7 @@ contract SimpleMarketplace {
     }
 
     function MakeOffer(int offerPrice) public {
-        if (offerPrice == 0) {
-            revert();
-        }
-
-        if (State != StateType.ItemAvailable) {
-            revert();
-        }
-
-        if (InstanceOwner == msg.sender) {
+        if (offerPrice == 0 || State != StateType.ItemAvailable || InstanceOwner == msg.sender) {
             revert();
         }
 
@@ -43,11 +35,7 @@ contract SimpleMarketplace {
     }
 
     function Reject() public {
-        if ( State != StateType.OfferPlaced ) {
-            revert();
-        }
-
-        if (InstanceOwner != msg.sender) {
+        if ( State != StateType.OfferPlaced || InstanceOwner != msg.sender) {
             revert();
         }
 
